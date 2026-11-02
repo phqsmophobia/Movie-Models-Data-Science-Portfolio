@@ -9,3 +9,31 @@ print("\nMovies Information")
 print(movies.info())
 print("\nMovies Statistics")
 print(movies.describe())
+
+# clean up section
+# checking for duplicate rows
+print("\nDuplicate Movie Entries")
+print(movies.duplicated().sum())
+
+# then we remove duplicate movie rows
+movies = movies.drop_duplicates()
+# then check again to see if any were missed
+print("\nDuplicate Movie Entries Check")
+print(movies.duplicated().sum())
+# save new cleaned data set
+movies.to_csv("movies.csv", index=False)
+
+# now we want to remove any entries with missing revenue or budget fields
+movies = movies.dropna(subset=["budget", "revenue"])
+movies = movies[movies["revenue"]!=0]
+movies = movies[movies["budget"]!=0]
+print("\nMovies Count After Cleaning")
+print(len(movies))
+# save cleaned set
+movies.to_csv("movies.csv", index=False)
+
+#extract fields we need, starting with turning date into just year
+movies["release_date"] = panda.to_datetime(movies["release_date"])
+movies["release_year"] = movies["release_date"].dt.year
+# update the dataset with a new field
+movies.to_csv("movies.csv", index=False)
