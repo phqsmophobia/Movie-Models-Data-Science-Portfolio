@@ -1,5 +1,6 @@
 from config import KEY,URL_START # always hide API KEY
 import requests
+import csv
 
 #set up
 url = f"{URL_START}/movie/popular"
@@ -41,6 +42,11 @@ for entry in movieselection:
 # print each movie data
 for entry in refinedmovieselection:
     print(entry)
-
 # helps view the total movie count retrieved
 print("count:", len(refinedmovieselection))
+
+# write to the csv file
+with open("movies.csv", "w", newline="", encoding="utf-8") as file:
+    file.write("title,release_date,genres,budget,revenue\n")
+    for i in refinedmovieselection:
+        file.write(f'{i["title"]},{i["release_date"]},{i["genres"]},{i["budget"]},{i["revenue"]}\n')
