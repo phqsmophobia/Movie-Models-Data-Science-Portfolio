@@ -37,3 +37,9 @@ movies["release_date"] = panda.to_datetime(movies["release_date"])
 movies["release_year"] = movies["release_date"].dt.year
 # update the dataset with a new field
 movies.to_csv("movies.csv", index=False)
+
+# convert movie genres into true or false fall in categories
+genre_columns = movies["genres"].str.get_dummies(sep=", ")
+# add new columns of T/F to our existing dataset
+movies = panda.concat([movies, genre_columns], axis=1)
+movies.to_csv("movies.csv", index=False) #save
