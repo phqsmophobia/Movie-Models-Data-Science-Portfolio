@@ -47,6 +47,7 @@ print("count:", len(refinedmovieselection))
 
 # write to the csv file
 with open("movies.csv", "w", newline="", encoding="utf-8") as file:
-    file.write("title,release_date,genres,budget,revenue\n")
-    for i in refinedmovieselection:
-        file.write(f'{i["title"]},{i["release_date"]},{i["genres"]},{i["budget"]},{i["revenue"]}\n')
+    fieldnames = ["title", "release_date", "genres", "budget", "revenue"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(refinedmovieselection)
