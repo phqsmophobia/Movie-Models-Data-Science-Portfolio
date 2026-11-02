@@ -43,3 +43,10 @@ genre_columns = movies["genres"].str.get_dummies(sep=", ")
 # add new columns of T/F to our existing dataset
 movies = panda.concat([movies, genre_columns], axis=1)
 movies.to_csv("movies.csv", index=False) #save
+
+# titles for graph visualisation
+movietitles = movies["title"]
+# the features for our regression model
+x_value = movies[["budget", "release_year"] + list(genre_columns.columns)]
+# what I want to predict
+y_value = movies["revenue"]
