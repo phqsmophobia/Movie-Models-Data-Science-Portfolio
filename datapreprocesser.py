@@ -1,5 +1,7 @@
 import pandas as panda
 movies = panda.read_csv("movies.csv")
+movies = movies[["title", "release_date", "genres", "budget", "revenue"]]
+print(movies.columns[movies.columns.duplicated()].tolist())
 # analyse the data within the csv
 print("\nSum of Missing Values")
 print(movies.isnull().sum())
