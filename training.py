@@ -28,7 +28,7 @@ result["Actual Revenue"] = testingsety.values
 result["Predicted Revenue"] = predictions
 
 # Display a graph comparing both values
-result.plot()
+result.plot(alpha=0.5)
 plot.gca().yaxis.set_major_formatter(StrMethodFormatter('${x:,.0f}'))
 plot.xlabel("Test Movie Number")
 plot.ylabel("Movie Revenue in $")
